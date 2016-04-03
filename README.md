@@ -43,3 +43,16 @@ and run while making sure to set the `BASE_URL`:
 ```
 docker run -d --name ia-bamboo-web -e BASE_URL='http://192.168.99.100/' -p 80:80 --link ia-bamboo-db:db mybambooinvoice
 ```
+
+## Notes
+
+### Example email.php for gmail
+
+```
+$config['protocol'] = 'smtp';
+$config['smtp_host'] = 'ssl://smtp.gmail.com';
+$config['smtp_user'] = 'you@gmail.com';
+$config['smtp_pass'] = 'yourpassword';
+$config['smtp_port'] = '465';
+$config['newline'] = "\r\n"; // This is what makes it work with GMAIL
+```
