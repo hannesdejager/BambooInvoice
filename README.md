@@ -1,7 +1,6 @@
 # BambooInvoice in Docker
 
-I've forked [Derek Allard's](https://github.com/derekallard/BambooInvoice) BambooInvoice that helped me so hugely when I started out freelancing and dockerized it 
-
+I've forked [Derek Allard's](https://github.com/derekallard/BambooInvoice) BambooInvoice that helped me so hugely when I started out freelancing and dockerized it so I can still send invoices, only now from my CoreOS host :-)
 
 ## Running the database container
 
@@ -19,10 +18,10 @@ docker run -d --name bamboo-db \
 
 ## Running the web container
 
-The Dockerfile packaged with this project contains an `ONBUILD` instruction that requires 3 bamboo configuration files. So start with your own Dockerfile based of the contained one:
+The Dockerfile packaged with this project contains an `ONBUILD` instruction that requires 3 bamboo configuration files. So start with your own Dockerfile based off the one in this repo:
 
 ```
-  1 FROM hdejager/bambooinvoice
+  1 FROM hdejager/bamboo-invoice
   2 MAINTAINER Hannes de Jager <hannes.de.jager@gmail.com>
   3 
   4 COPY php.ini-development /usr/local/etc/php/php.ini
@@ -34,14 +33,14 @@ and place as siblings in the directory:
 - database.php
 - email.php
 
-Start by copying the ones in `/web/bamboo_system_files/application/config/` and modify for your environment.
+Start by copying the ones in `/web/bamboo_system_files/application/config/` in the source and modify for your environment.
 
 Build: `docker build -t mybambooinvoice .`
 
 and run while making sure to set the `BASE_URL`:
 
 ```
-docker run -d --name ia-bamboo-web -e BASE_URL='http://192.168.99.100/' -p 80:80 --link ia-bamboo-db:db mybambooinvoice
+docker run -d --name ia-bamboo-web -e BASE_URL='http://192.168.99.100/' -p 80:80 --link bamboo-db:db mybambooinvoice
 ```
 
 ## Notes
