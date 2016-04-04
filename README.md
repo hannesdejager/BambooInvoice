@@ -32,6 +32,7 @@ and place as siblings in the directory:
 - config.php
 - database.php
 - email.php
+- logo.(jpg|png)
 
 Start by copying the ones in `/web/bamboo_system_files/application/config/` in the source and modify for your environment.
 
